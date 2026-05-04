@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Sample Web Application Pentest Finding Report</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 40px;
+      color: #222;
+      background-color: #f7f7f7;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    h1 {
+      border-bottom: 3px solid #222;
+      padding-bottom: 12px;
+    }
+
+    h2 {
+      margin-top: 36px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background-color: #222;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
+    .meta {
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    code {
+      background: #f1f1f1;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+
+    ul {
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <h1>Sample Web Application Pentest Finding Report</h1>
+
+  <div class="meta">
+    <span class="badge">PENTEST</span>
+    <p><strong>Author:</strong> Damin</p>
+    <p><strong>Date:</strong> 2026-05-04</p>
+  </div>
+
+  <h2>1. Executive Summary</h2>
+  <p>A reflected cross-site scripting issue was identified in a demo web application search parameter. The application reflects user-controlled input in the HTTP response without sufficient output encoding.</p>
+
+  <p><strong>Key Risk:</strong> An attacker may craft a malicious URL that executes JavaScript in the victim's browser when opened.</p>
+
+  <h2>2. Target Information</h2>
+  <table>
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td>service</td>
+      <td>Demo Web Application</td>
+    </tr>
+    <tr>
+      <td>scope</td>
+      <td>Authorized lab environment</td>
+    </tr>
+    <tr>
+      <td>finding_id</td>
+      <td>WEB-001</td>
+    </tr>
+    <tr>
+      <td>affected_endpoint</td>
+      <td>/search?q=</td>
+    </tr>
+    <tr>
+      <td>vulnerability_type</td>
+      <td>Reflected Cross-Site Scripting</td>
+    </tr>
+    <tr>
+      <td>cwe</td>
+      <td>CWE-79</td>
+    </tr>
+    <tr>
+      <td>owasp_category</td>
+      <td>Injection</td>
+    </tr>
+  </table>
+
+  <h2>3. Severity Assessment</h2>
+  <table>
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td>risk_level</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <td>impact</td>
+      <td>Session theft, phishing, or arbitrary script execution in the user's browser</td>
+    </tr>
+    <tr>
+      <td>likelihood</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <td>exploitability</td>
+      <td>User interaction may be required</td>
+    </tr>
+  </table>
+
+  <h2>4. Technical Analysis</h2>
+  <p>The affected endpoint reflects the q parameter into the response body. If the input is not properly encoded before rendering, browser-side script execution may occur.</p>
+
+  <h2>5. Attack Flow</h2>
+  <table>
+    <tr>
+      <th>Step</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>The attacker identifies an input parameter reflected in the response.</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>The attacker crafts a URL containing a script payload.</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>The victim opens the crafted URL.</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>The script executes in the victim's browser context.</td>
+    </tr>
+  </table>
+
+  <h2>6. Detection Points</h2>
+    <h3>Application</h3>
+      <ul>
+        <li>Review server logs for suspicious script-like payloads in query parameters.</li>
+        <li>Monitor repeated requests containing encoded JavaScript patterns.</li>
+      </ul>
+    <h3>Code</h3>
+      <ul>
+        <li>Inspect output rendering logic for missing context-aware encoding.</li>
+        <li>Verify whether template auto-escaping is enabled.</li>
+      </ul>
+
+  <h2>7. Indicators of Compromise</h2>
+    <h3>Urls</h3>
+      <ul>
+        <li><code>https://example.com/search?q=<sanitized-payload></code></li>
+      </ul>
+    <h3>Parameters</h3>
+      <ul>
+        <li><code>q</code></li>
+      </ul>
+
+  <h2>8. MITRE ATT&CK Mapping</h2>
+  <table>
+    <tr>
+      <th>Tactic</th>
+      <th>Technique ID</th>
+      <th>Technique Name</th>
+      <th>Evidence</th>
+    </tr>
+    <tr>
+      <td>Initial Access</td>
+      <td>T1189</td>
+      <td>Drive-by Compromise</td>
+      <td>A crafted URL may be used to trigger browser-side script execution.</td>
+    </tr>
+    <tr>
+      <td>Credential Access</td>
+      <td>T1539</td>
+      <td>Steal Web Session Cookie</td>
+      <td>In insecure configurations, script execution may be abused to access session-related data.</td>
+    </tr>
+  </table>
+  
+  <h2>9. Detection Rules</h2>
+  <p>No detection rules provided.</p>
+
+  <h2>10. Mitigation and Remediation</h2>
+  <ul>
+    <li>Apply context-aware output encoding.</li>
+    <li>Validate and sanitize user-controlled input.</li>
+    <li>Enable Content Security Policy where appropriate.</li>
+    <li>Use framework-provided template escaping features.</li>
+    <li>Add automated security tests for reflected input handling.</li>
+  </ul>
+
+  <h2>11. References</h2>
+  <ul>
+    <li>OWASP Web Security Testing Guide</li>
+    <li>OWASP Cross Site Scripting Prevention Cheat Sheet</li>
+    <li>CWE-79</li>
+  </ul>
+
+</div>
+</body>
+</html>
