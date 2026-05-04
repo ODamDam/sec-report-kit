@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>sec-report-kit Demo Reports</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 40px;
+      background-color: #f7f7f7;
+      color: #222;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    h1 {
+      border-bottom: 3px solid #222;
+      padding-bottom: 12px;
+    }
+
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 16px 0;
+      background: #fafafa;
+    }
+
+    .card h2 {
+      margin-top: 0;
+    }
+
+    a {
+      color: #0645ad;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background-color: #222;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .muted {
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>sec-report-kit Demo Reports</h1>
+
+  <p>
+    <strong>sec-report-kit</strong> is a lightweight CLI tool that converts
+    structured YAML-based security analysis data into consistent Markdown and HTML reports.
+  </p>
+
+  <p class="muted">
+    This page provides generated sample reports for CVE analysis, malware triage,
+    and penetration testing finding workflows.
+  </p>
+
+  <div class="card">
+    <span class="badge">CVE Analysis</span>
+    <h2>CVE-2023-38831 WinRAR Vulnerability Report</h2>
+    <p>
+      Sample report for a CVE-based vulnerability analysis workflow.
+    </p>
+    <a href="reports/cve-2023-38831.html">View HTML Report</a>
+  </div>
+
+  <div class="card">
+    <span class="badge">Malware Triage</span>
+    <h2>Agent Tesla Malware Triage Report</h2>
+    <p>
+      Sample report for malware triage, IOC organization, and ATT&CK mapping.
+    </p>
+    <a href="reports/agent-tesla-malware-triage-report.html">View HTML Report</a>
+  </div>
+
+  <div class="card">
+    <span class="badge">Pentest Finding</span>
+    <h2>Sample Web Application Pentest Finding Report</h2>
+    <p>
+      Sample report for penetration testing finding documentation.
+    </p>
+    <a href="reports/demo-web-application.html">View HTML Report</a>
+  </div>
+
+  <hr>
+
+  <p class="muted">
+    Educational and defensive security use only. No malware binaries, live exploit code,
+    or sensitive victim data are included.
+  </p>
+</div>
+</body>
+</html>
