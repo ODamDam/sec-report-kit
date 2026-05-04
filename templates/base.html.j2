@@ -220,8 +220,35 @@
   {% else %}
   <p>No ATT&CK mapping provided.</p>
   {% endif %}
+  
+  <h2>9. Detection Rules</h2>
+  {% if report.rules %}
+    {% for rule_type, rule_items in report.rules.items() %}
+    <h3>{{ rule_type | upper }}</h3>
+      {% if rule_items %}
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Path</th>
+          <th>Description</th>
+        </tr>
+        {% for rule in rule_items %}
+        <tr>
+          <td>{{ rule.name }}</td>
+          <td><code>{{ rule.path }}</code></td>
+          <td>{{ rule.description }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+      <p>No {{ rule_type }} rules provided.</p>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+  <p>No detection rules provided.</p>
+  {% endif %}
 
-  <h2>9. Mitigation and Remediation</h2>
+  <h2>10. Mitigation and Remediation</h2>
   {% if report.mitigation %}
   <ul>
     {% for item in report.mitigation %}
@@ -232,7 +259,7 @@
   <p>No mitigation guidance provided.</p>
   {% endif %}
 
-  <h2>10. References</h2>
+  <h2>11. References</h2>
   {% if report.references %}
   <ul>
     {% for ref in report.references %}

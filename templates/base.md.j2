@@ -132,7 +132,30 @@ No ATT&CK mapping provided.
 
 ---
 
-## 9. Mitigation and Remediation
+## 9. Detection Rules
+
+{% if report.rules %}
+{% for rule_type, rule_items in report.rules.items() %}
+### {{ rule_type | upper }}
+
+{% if rule_items %}
+| Name | Path | Description |
+|---|---|---|
+{% for rule in rule_items %}
+| {{ rule.name }} | `{{ rule.path }}` | {{ rule.description }} |
+{% endfor %}
+{% else %}
+No {{ rule_type }} rules provided.
+{% endif %}
+
+{% endfor %}
+{% else %}
+No detection rules provided.
+{% endif %}
+
+---
+
+## 10. Mitigation and Remediation
 
 {% if report.mitigation %}
 {% for item in report.mitigation %}
@@ -144,7 +167,7 @@ No mitigation guidance provided.
 
 ---
 
-## 10. References
+## 11. References
 
 {% if report.references %}
 {% for ref in report.references %}

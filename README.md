@@ -34,6 +34,8 @@ This project separates structured analysis data from report presentation. Analys
 - IOC section support
 - MITRE ATT&CK mapping section support
 - Detection and mitigation sections
+- YARA rule reference section
+- Sigma rule reference section
 
 ## Project Structure
 
@@ -52,53 +54,67 @@ sec-report-kit/
 ├─ README.md
 ├─ requirements.txt
 ├─ pyproject.toml
-└─ LICENSE```
+└─ LICENSE
+```
 
 ## Installation
 ```git clone https://github.com/YOUR_USERNAME/sec-report-kit.git
 cd sec-report-kit
-
+```
+```
 python -m venv .venv
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\.venv\Scripts\Activate.ps1
-
+```
+```
 python -m pip install --upgrade pip
-python -m pip install -r requirements.txt```
+```
+```
+python -m pip install -r requirements.txt
+```
 
 ## Usage
 Generate a report from a YAML input file:
-```python -m sec_report_kit.cli examples/cve/cve-2023-38831.yaml```
+```
+python -m sec_report_kit.cli examples/cve/cve-2023-38831.yaml
+```
 
 Generate reports into examples/outputs:
-```python -m sec_report_kit.cli examples/cve/cve-2023-38831.yaml -o examples/outputs
+```
+python -m sec_report_kit.cli examples/cve/cve-2023-38831.yaml -o examples/outputs
 python -m sec_report_kit.cli examples/malware/agent-tesla-triage.yaml -o examples/outputs
-python -m sec_report_kit.cli examples/pentest/sample-web-finding.yaml -o examples/outputs```
+python -m sec_report_kit.cli examples/pentest/sample-web-finding.yaml -o examples/outputs
+```
 Generate only HTML:
-```python -m sec_report_kit.cli examples/cve/cve-2023-38831.yaml -f html```
+```
+python -m sec_report_kit.cli examples/cve/cve-2023-38831.yaml -f html
+```
 Generate only Markdown:
-```python -m sec_report_kit.cli examples/cve/cve-2023-38831.yaml -f md```
+```
+python -m sec_report_kit.cli examples/cve/cve-2023-38831.yaml -f md
+```
 
 YAML Schema
 
 See docs/schema.md
 .
 
-Roadmap
- YAML-based report input
- Markdown report generation
- HTML report generation
- CVE analysis report example
- Malware triage report example
- Pentest finding report example
- Example generated reports
- GitHub Pages demo
- YARA rule section
- Sigma rule section
- DOCX export
- PDF export
- Input validation tests
- Unit tests
-Disclaimer
+## Roadmap
+ - [x] YAML-based report input
+ - [x] Markdown report generation
+ - [x] HTML report generation
+ - [x] CVE analysis report example
+ - [x] Malware triage report example
+ - [x] Pentest finding report example
+ - [x] Example generated reports
+ - [x] GitHub Pages demo
+ - [x] YARA rule section
+ - [x] Sigma rule section
+ - [ ] DOCX export
+ - [ ] PDF export
+ - [ ] Input validation tests
+ - [ ] Unit tests
+- [ ] Disclaimer
 
 This project is intended for educational and defensive security purposes only.
 

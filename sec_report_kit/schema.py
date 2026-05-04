@@ -29,6 +29,7 @@ class ReportInput(BaseModel):
     mitigation: list[str] = Field(default_factory=list)
     iocs: dict[str, Any] = Field(default_factory=dict)
     attack_mapping: list[dict[str, Any]] = Field(default_factory=list)
+    rules: dict[str, Any] = Field(default_factory=dict)
     references: list[str] = Field(default_factory=list)
 
 

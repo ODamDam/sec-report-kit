@@ -20,6 +20,7 @@ Each report type shares common fields, while allowing report-specific fields to 
 | `detection` | object | No | Host, network, log, application, or code-based detection points |
 | `iocs` | object | No | Indicators of compromise such as hashes, domains, IPs, URLs, and file paths |
 | `attack_mapping` | list | No | MITRE ATT&CK mapping information |
+| `rules` | object | No | Detection rule references such as YARA and Sigma |
 | `mitigation` | list | No | Mitigation and remediation guidance |
 | `references` | list | No | External references |
 
@@ -141,6 +142,25 @@ attack_mapping:
     technique_name: "User Execution: Malicious File"
     evidence: "The infection flow depends on the user executing a malicious file."
 ```
+
+## rules
+
+The `rules` object links detection rule files to the generated report.
+
+```yaml
+rules:
+  yara:
+    - name: "agent_tesla_triage.yar"
+      path: "rules/yara/agent_tesla_triage.yar"
+      description: "Sample YARA rule for triage-level malware detection."
+  sigma:
+    - name: "suspicious_archive_child_process.yml"
+      path: "rules/sigma/suspicious_archive_child_process.yml"
+      description: "Sample Sigma rule for suspicious child processes spawned by archive utilities."
+```
+The current version links rule files in the report.
+It does not validate the syntax of YARA or Sigma rules yet.
+
 ## mitigation
 ```
 mitigation:
