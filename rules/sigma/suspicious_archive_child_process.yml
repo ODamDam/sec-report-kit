@@ -2,7 +2,7 @@ title: Suspicious Child Process Spawned By Archive Utility
 id: 7f6f0f6b-6c7e-4f9d-8a9c-archive-child-process-demo
 status: experimental
 description: Detects suspicious child processes spawned by archive utilities such as WinRAR, 7-Zip, or Windows Explorer archive handling workflows.
-author: Owls Hippie
+author: Damin
 date: 2026-05-04
 references:
   - https://attack.mitre.org/techniques/T1204/002/

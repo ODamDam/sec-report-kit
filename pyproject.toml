@@ -5,7 +5,7 @@ description = "A lightweight CLI tool for generating security analysis reports f
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [
-    { name = "Owls Hippie" }
+    { name = "Damin" }
 ]
 dependencies = [
     "typer[all]>=0.12.0",

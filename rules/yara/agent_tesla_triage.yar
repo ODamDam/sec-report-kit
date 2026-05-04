@@ -2,7 +2,7 @@ rule MAL_Triage_AgentTesla_Like_DotNet_Infostealer
 {
     meta:
         description = "Triage-level detection for suspicious .NET infostealer-like samples"
-        author = "Owls Hippie"
+        author = "Damin"
         date = "2026-05-04"
         usage = "Educational and defensive security use only"
         confidence = "low_to_medium"
