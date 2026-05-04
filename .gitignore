@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Virtual environment
+.venv/
+venv/
+
+# Generated local output files
+outputs/*.html
+outputs/*.md
+outputs/*.docx
+outputs/*.pdf
+!outputs/.gitkeep
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+
+# Secrets
+.env

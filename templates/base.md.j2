@@ -1,0 +1,155 @@
+# {{ report.title }}
+
+{% if report.author or report.date %}
+| Field | Value |
+|---|---|
+{% if report.author %}| Author | {{ report.author }} |{% endif %}
+{% if report.date %}| Date | {{ report.date }} |{% endif %}
+| Report Type | {{ report.report_type | upper }} |
+{% endif %}
+
+---
+
+## 1. Executive Summary
+
+{% if report.summary.overview %}
+{{ report.summary.overview }}
+{% else %}
+No executive summary provided.
+{% endif %}
+
+{% if report.summary.key_risk %}
+**Key Risk:** {{ report.summary.key_risk }}
+{% endif %}
+
+---
+
+## 2. Target Information
+
+{% if report.target %}
+| Field | Value |
+|---|---|
+{% for key, value in report.target.items() %}
+| {{ key }} | {{ value }} |
+{% endfor %}
+{% else %}
+No target information provided.
+{% endif %}
+
+---
+
+## 3. Severity Assessment
+
+{% if report.severity %}
+| Field | Value |
+|---|---|
+{% for key, value in report.severity.items() %}
+| {{ key }} | {{ value }} |
+{% endfor %}
+{% else %}
+No severity information provided.
+{% endif %}
+
+---
+
+## 4. Technical Analysis
+
+{% if report.summary.technical_details %}
+{{ report.summary.technical_details }}
+{% else %}
+Technical details should describe the vulnerable component, root cause, attack condition, and security impact.
+{% endif %}
+
+---
+
+## 5. Attack Flow
+
+{% if report.attack_flow %}
+| Step | Description |
+|---|---|
+{% for item in report.attack_flow %}
+| {{ item.step }} | {{ item.description }} |
+{% endfor %}
+{% else %}
+No attack flow provided.
+{% endif %}
+
+---
+
+## 6. Detection Points
+
+{% if report.detection %}
+{% for category, items in report.detection.items() %}
+### {{ category | title }}
+
+{% if items is string %}
+- {{ items }}
+{% else %}
+{% for item in items %}
+- {{ item }}
+{% endfor %}
+{% endif %}
+
+{% endfor %}
+{% else %}
+No detection points provided.
+{% endif %}
+
+---
+
+## 7. Indicators of Compromise
+
+{% if report.iocs %}
+{% for category, items in report.iocs.items() %}
+### {{ category | title }}
+
+{% if items %}
+{% for item in items %}
+- {{ item }}
+{% endfor %}
+{% else %}
+- None
+{% endif %}
+
+{% endfor %}
+{% else %}
+No IOC provided.
+{% endif %}
+
+---
+
+## 8. MITRE ATT&CK Mapping
+
+{% if report.attack_mapping %}
+| Tactic | Technique ID | Technique Name | Evidence |
+|---|---|---|---|
+{% for item in report.attack_mapping %}
+| {{ item.tactic }} | {{ item.technique_id }} | {{ item.technique_name }} | {{ item.evidence }} |
+{% endfor %}
+{% else %}
+No ATT&CK mapping provided.
+{% endif %}
+
+---
+
+## 9. Mitigation and Remediation
+
+{% if report.mitigation %}
+{% for item in report.mitigation %}
+- {{ item }}
+{% endfor %}
+{% else %}
+No mitigation guidance provided.
+{% endif %}
+
+---
+
+## 10. References
+
+{% if report.references %}
+{% for ref in report.references %}
+- {{ ref }}
+{% endfor %}
+{% else %}
+No references provided.
+{% endif %}

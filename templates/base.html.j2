@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ report.title }}</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 40px;
+      color: #222;
+      background-color: #f7f7f7;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    h1 {
+      border-bottom: 3px solid #222;
+      padding-bottom: 12px;
+    }
+
+    h2 {
+      margin-top: 36px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background-color: #222;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
+    .meta {
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    code {
+      background: #f1f1f1;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+
+    ul {
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <h1>{{ report.title }}</h1>
+
+  <div class="meta">
+    <span class="badge">{{ report.report_type | upper }}</span>
+    {% if report.author %}
+    <p><strong>Author:</strong> {{ report.author }}</p>
+    {% endif %}
+    {% if report.date %}
+    <p><strong>Date:</strong> {{ report.date }}</p>
+    {% endif %}
+  </div>
+
+  <h2>1. Executive Summary</h2>
+  {% if report.summary.overview %}
+  <p>{{ report.summary.overview }}</p>
+  {% else %}
+  <p>No executive summary provided.</p>
+  {% endif %}
+
+  {% if report.summary.key_risk %}
+  <p><strong>Key Risk:</strong> {{ report.summary.key_risk }}</p>
+  {% endif %}
+
+  <h2>2. Target Information</h2>
+  {% if report.target %}
+  <table>
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+    {% for key, value in report.target.items() %}
+    <tr>
+      <td>{{ key }}</td>
+      <td>{{ value }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>No target information provided.</p>
+  {% endif %}
+
+  <h2>3. Severity Assessment</h2>
+  {% if report.severity %}
+  <table>
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+    {% for key, value in report.severity.items() %}
+    <tr>
+      <td>{{ key }}</td>
+      <td>{{ value }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>No severity information provided.</p>
+  {% endif %}
+
+  <h2>4. Technical Analysis</h2>
+  {% if report.summary.technical_details %}
+  <p>{{ report.summary.technical_details }}</p>
+  {% else %}
+  <p>Technical details should describe the vulnerable component, root cause, attack condition, and security impact.</p>
+  {% endif %}
+
+  <h2>5. Attack Flow</h2>
+  {% if report.attack_flow %}
+  <table>
+    <tr>
+      <th>Step</th>
+      <th>Description</th>
+    </tr>
+    {% for item in report.attack_flow %}
+    <tr>
+      <td>{{ item.step }}</td>
+      <td>{{ item.description }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>No attack flow provided.</p>
+  {% endif %}
+
+  <h2>6. Detection Points</h2>
+  {% if report.detection %}
+    {% for category, items in report.detection.items() %}
+    <h3>{{ category | title }}</h3>
+      {% if items is string %}
+      <ul>
+        <li>{{ items }}</li>
+      </ul>
+      {% else %}
+      <ul>
+        {% for item in items %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+  <p>No detection points provided.</p>
+  {% endif %}
+
+  <h2>7. Indicators of Compromise</h2>
+  {% if report.iocs %}
+    {% for category, items in report.iocs.items() %}
+    <h3>{{ category | title }}</h3>
+      {% if items %}
+      <ul>
+        {% for item in items %}
+        <li><code>{{ item }}</code></li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>None</p>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+  <p>No IOC provided.</p>
+  {% endif %}
+
+  <h2>8. MITRE ATT&CK Mapping</h2>
+  {% if report.attack_mapping %}
+  <table>
+    <tr>
+      <th>Tactic</th>
+      <th>Technique ID</th>
+      <th>Technique Name</th>
+      <th>Evidence</th>
+    </tr>
+    {% for item in report.attack_mapping %}
+    <tr>
+      <td>{{ item.tactic }}</td>
+      <td>{{ item.technique_id }}</td>
+      <td>{{ item.technique_name }}</td>
+      <td>{{ item.evidence }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>No ATT&CK mapping provided.</p>
+  {% endif %}
+
+  <h2>9. Mitigation and Remediation</h2>
+  {% if report.mitigation %}
+  <ul>
+    {% for item in report.mitigation %}
+    <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No mitigation guidance provided.</p>
+  {% endif %}
+
+  <h2>10. References</h2>
+  {% if report.references %}
+  <ul>
+    {% for ref in report.references %}
+    <li>{{ ref }}</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No references provided.</p>
+  {% endif %}
+
+</div>
+</body>
+</html>

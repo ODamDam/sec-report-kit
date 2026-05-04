@@ -1,0 +1,22 @@
+[project]
+name = "sec-report-kit"
+version = "0.1.0"
+description = "A lightweight CLI tool for generating security analysis reports from YAML."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Owls Hippie" }
+]
+dependencies = [
+    "typer[all]>=0.12.0",
+    "jinja2>=3.1.0",
+    "pyyaml>=6.0.0",
+    "pydantic>=2.0.0",
+    "rich>=13.0.0"
+]
+
+[project.scripts]
+sec-report = "sec_report_kit.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
