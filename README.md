@@ -2,37 +2,108 @@
 
 `sec-report-kit` is a lightweight CLI tool for generating security analysis reports from structured YAML input files.
 
+`sec-report-kit`은 CVE 분석, 악성코드 트리아지, 모의해킹 Finding을 YAML로 구조화하고, 이를 Markdown/HTML 보고서로 자동 생성하는 보안 분석 보고서 자동화 도구입니다.
+
 The project is designed for CVE analysis, malware triage, and penetration testing report workflows.  
 It converts structured analysis data into Markdown and HTML reports.
 
+## Overview
+
+Security analysis reports often require repeated sections such as executive summary, target information, severity, technical analysis, attack flow, detection points, IOC, MITRE ATT&CK mapping, mitigation, and references.
+
+This project separates structured analysis data from report presentation. Analysts write findings in YAML, and the tool generates consistent reports in Markdown and HTML.
+
+
+## Supported Report Types
+
+| Report Type | Description |
+|---|---|
+| CVE Analysis | Vulnerability analysis report for CVE-based research |
+| Malware Triage | Malware triage report with IOC, behavior, and ATT&CK mapping |
+| Pentest Finding | Penetration testing finding report for web or system vulnerabilities |
+
 ## Features
 
-- Generate security reports from YAML
-- Support Markdown and HTML output
-- Provide reusable report templates
-- Structure CVE analysis reports
-- Include detection points, IOC sections, mitigation guidance, and MITRE ATT&CK mapping
-
-## Why I Built This
-
-During malware triage and CVE analysis studies, report formats often became inconsistent and important sections such as IOC, ATT&CK mapping, detection points, and mitigation guidance were easy to omit.
-
-This project standardizes the report writing process by separating structured analysis data from report presentation.
+- YAML-based report input
+- Markdown report generation
+- HTML report generation
+- Reusable report templates
+- CVE analysis report example
+- Malware triage report example
+- Pentest finding report example
+- IOC section support
+- MITRE ATT&CK mapping section support
+- Detection and mitigation sections
 
 ## Project Structure
 
 ```text
 sec-report-kit/
+├─ docs/
+│  └─ schema.md
 ├─ examples/
+│  ├─ cve/
+│  ├─ malware/
+│  ├─ pentest/
+│  └─ outputs/
 ├─ outputs/
+├─ sec_report_kit/
 ├─ templates/
-└─ sec_report_kit/
+├─ README.md
+├─ requirements.txt
+├─ pyproject.toml
+└─ LICENSE```
 
-## Example Reports
+## Installation
+```git clone https://github.com/YOUR_USERNAME/sec-report-kit.git
+cd sec-report-kit
 
-The repository includes generated sample reports under `examples/outputs/`.
+python -m venv .venv
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\.venv\Scripts\Activate.ps1
 
-| Report Type | Input YAML | Markdown | HTML |
-|---|---|---|---|
-| CVE Analysis | [cve-2023-38831.yaml](examples/cve/cve-2023-38831.yaml) | [Markdown](examples/outputs/cve-2023-38831.md) | [HTML](examples/outputs/cve-2023-38831.html) |
-| Malware Triage | [agent-tesla-triage.yaml](examples/malware/agent-tesla-triage.yaml) | [Markdown](examples/outputs/agent-tesla-malware-triage-report.md) | [HTML](examples/outputs/agent-tesla-malware-triage-report.html) |
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt```
+
+## Usage
+Generate a report from a YAML input file:
+```python -m sec_report_kit.cli examples/cve/cve-2023-38831.yaml```
+
+Generate reports into examples/outputs:
+```python -m sec_report_kit.cli examples/cve/cve-2023-38831.yaml -o examples/outputs
+python -m sec_report_kit.cli examples/malware/agent-tesla-triage.yaml -o examples/outputs
+python -m sec_report_kit.cli examples/pentest/sample-web-finding.yaml -o examples/outputs```
+Generate only HTML:
+```python -m sec_report_kit.cli examples/cve/cve-2023-38831.yaml -f html```
+Generate only Markdown:
+```python -m sec_report_kit.cli examples/cve/cve-2023-38831.yaml -f md```
+
+YAML Schema
+
+See docs/schema.md
+.
+
+Roadmap
+ YAML-based report input
+ Markdown report generation
+ HTML report generation
+ CVE analysis report example
+ Malware triage report example
+ Pentest finding report example
+ Example generated reports
+ GitHub Pages demo
+ YARA rule section
+ Sigma rule section
+ DOCX export
+ PDF export
+ Input validation tests
+ Unit tests
+Disclaimer
+
+This project is intended for educational and defensive security purposes only.
+
+No malware binaries, live exploit code, real victim data, credentials, or sensitive infrastructure information are included in this repository.
+
+## License
+
+This project is licensed under the MIT License.
