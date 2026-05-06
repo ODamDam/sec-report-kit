@@ -36,12 +36,15 @@
       width: 100%;
       border-collapse: collapse;
       margin: 16px 0;
+      table-layout: fixed;
     }
 
     th, td {
       border: 1px solid #ddd;
       padding: 10px;
       vertical-align: top;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     th {
@@ -67,6 +70,9 @@
       background: #f1f1f1;
       padding: 2px 5px;
       border-radius: 4px;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-all;
     }
 
     ul {
@@ -226,7 +232,7 @@
     {% for rule_type, rule_items in report.rules.items() %}
     <h3>{{ rule_type | upper }}</h3>
       {% if rule_items %}
-      <table>
+      <table class="rule-table">
         <tr>
           <th>Name</th>
           <th>Path</th>
