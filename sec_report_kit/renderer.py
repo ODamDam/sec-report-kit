@@ -4,6 +4,7 @@ from typing import Iterable
 
 from jinja2 import Environment, FileSystemLoader
 
+from sec_report_kit.docx_renderer import render_docx_report
 from sec_report_kit.schema import load_report
 
 
@@ -77,6 +78,12 @@ def render_report(
         elif output_format == "html":
             template = env.get_template("base.html.j2")
             output_path = output_dir / f"{slug}.html"
+
+        elif output_format == "docx":
+            output_path = output_dir / f"{slug}.docx"
+            render_docx_report(data, output_path)
+            generated_files.append(output_path)
+            continue
 
         else:
             raise ValueError(f"Unsupported output format: {output_format}")

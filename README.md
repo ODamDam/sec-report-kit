@@ -38,6 +38,7 @@ This project separates structured analysis data from report presentation. Analys
 - Sigma rule reference section
 - Security-focused input validation
 - Unit tests for schema loading and report rendering
+- DOCX report generation
 
 ## Project Structure
 
@@ -95,6 +96,12 @@ Generate only Markdown:
 ```
 python -m sec_report_kit.cli examples/cve/cve-2023-38831.yaml -f md
 ```
+Generate only DOCX:
+
+```
+powershell
+python -m sec_report_kit.cli examples/cve/cve-2023-38831.yaml -f docx
+```
 
 YAML Schema
 
@@ -112,11 +119,10 @@ See docs/schema.md
  - [x] GitHub Pages demo
  - [x] YARA rule section
  - [x] Sigma rule section
- - [ ] DOCX export
- - [ ] PDF export
+ - [x] DOCX export
  - [x] Input validation tests
  - [x] Unit tests
-- [ ] Disclaimer
+- [x] Disclaimer
 
 This project is intended for educational and defensive security purposes only.
 
