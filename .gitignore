@@ -23,3 +23,6 @@ outputs/*.pdf
 
 # Secrets
 .env
+
+# Tests
+.pytest_cache/

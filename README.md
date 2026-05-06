@@ -36,6 +36,8 @@ This project separates structured analysis data from report presentation. Analys
 - Detection and mitigation sections
 - YARA rule reference section
 - Sigma rule reference section
+- Security-focused input validation
+- Unit tests for schema loading and report rendering
 
 ## Project Structure
 
@@ -112,8 +114,8 @@ See docs/schema.md
  - [x] Sigma rule section
  - [ ] DOCX export
  - [ ] PDF export
- - [ ] Input validation tests
- - [ ] Unit tests
+ - [x] Input validation tests
+ - [x] Unit tests
 - [ ] Disclaimer
 
 This project is intended for educational and defensive security purposes only.

@@ -3,6 +3,7 @@ from typing import Any, Literal
 
 import yaml
 from pydantic import BaseModel, ConfigDict, Field
+from sec_report_kit.validators import validate_report_data
 
 
 class ReportInput(BaseModel):
@@ -48,4 +49,8 @@ def load_report(path: Path) -> dict[str, Any]:
         raise ValueError(f"Input file is empty: {path}")
 
     report = ReportInput.model_validate(raw_data)
-    return report.model_dump()
+    data = report.model_dump()
+
+    validate_report_data(data)
+
+    return data
