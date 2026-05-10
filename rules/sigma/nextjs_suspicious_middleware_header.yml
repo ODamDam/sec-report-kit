@@ -1,0 +1,22 @@
+title: Suspicious Next.js Middleware Header Usage
+id: 1f6e6e98-2992-4727-nextjs-middleware-demo
+status: experimental
+description: Detects suspicious HTTP requests containing middleware-related headers that may indicate attempted authorization bypass.
+author: Damin
+date: 2026-05-10
+references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2025-29927
+tags:
+  - attack.initial_access
+  - attack.t1190
+logsource:
+  category: webserver
+detection:
+  selection:
+    cs-header|contains:
+      - 'x-middleware-subrequest'
+  condition: selection
+falsepositives:
+  - Internal testing
+  - Framework-specific legitimate middleware behavior
+level: high
